@@ -1,3 +1,4 @@
+// clang-format off
 /*
  * Copyright (C) 2018,2020-2021, The Linux Foundation. All rights reserved.
  * Not a Contribution.
@@ -17,9 +18,10 @@
  * limitations under the License.
  *
  * Changes from Qualcomm Innovation Center are provided under the following license:
- * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
+// clang-format on
 
 #ifndef ANDROID_HARDWARE_USB_GADGET_QTI_USBGADGET_H
 #define ANDROID_HARDWARE_USB_GADGET_QTI_USBGADGET_H
@@ -29,6 +31,7 @@
 #include <aidl/android/hardware/usb/gadget/GadgetFunction.h>
 #include <aidl/android/hardware/usb/gadget/IUsbGadget.h>
 #include <aidl/android/hardware/usb/gadget/IUsbGadgetCallback.h>
+
 #include <mutex>
 
 namespace aidl {
@@ -38,8 +41,8 @@ namespace usb {
 namespace gadget {
 
 using ::aidl::android::hardware::usb::gadget::GadgetFunction;
-using ::aidl::android::hardware::usb::gadget::IUsbGadgetCallback;
 using ::aidl::android::hardware::usb::gadget::IUsbGadget;
+using ::aidl::android::hardware::usb::gadget::IUsbGadgetCallback;
 using ::aidl::android::hardware::usb::gadget::Status;
 using ::aidl::android::hardware::usb::gadget::UsbSpeed;
 using ::android::hardware::Return;
@@ -48,22 +51,23 @@ using ::ndk::ScopedAStatus;
 using ::std::shared_ptr;
 
 struct UsbGadget : public BnUsbGadget {
-  UsbGadget(const char* const gadget);
+  UsbGadget(const char *const gadget);
 
-  ScopedAStatus setCurrentUsbFunctions(int64_t functions,
-            const shared_ptr<IUsbGadgetCallback> &callback,
-            int64_t timeoutMs, int64_t in_transactionId) override;
+  ScopedAStatus setCurrentUsbFunctions(
+      int64_t functions, const shared_ptr<IUsbGadgetCallback> &callback,
+      int64_t timeoutMs, int64_t in_transactionId) override;
 
-  ScopedAStatus getCurrentUsbFunctions(const shared_ptr<IUsbGadgetCallback> &callback,
-	    int64_t in_transactionId) override;
+  ScopedAStatus getCurrentUsbFunctions(
+      const shared_ptr<IUsbGadgetCallback> &callback,
+      int64_t in_transactionId) override;
 
   ScopedAStatus reset(const shared_ptr<IUsbGadgetCallback> &callback,
-            int64_t in_transactionId) override;
+                      int64_t in_transactionId) override;
 
   ScopedAStatus getUsbSpeed(const shared_ptr<IUsbGadgetCallback> &callback,
-	    int64_t in_transactionId) override;
+                            int64_t in_transactionId) override;
 
-private:
+ private:
   Status tearDownGadget();
   Status setupFunctions(int64_t functions,
                         const shared_ptr<IUsbGadgetCallback> &callback,
